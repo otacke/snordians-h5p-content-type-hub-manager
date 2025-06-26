@@ -1,0 +1,139 @@
+<?php
+/**
+ * Main plugin class file.
+ *
+ * @package sustainum-h5p-content-type-hub-manager
+ */
+
+namespace Sustainum\H5PContentTypeHubManager;
+
+// as suggested by the WordPress community.
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
+
+/**
+ * Main plugin class.
+ */
+class Main {
+	private static $H5P_CLASSES_FILE_PATH = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'h5p' . DIRECTORY_SEPARATOR . 'h5p-php-library' . DIRECTORY_SEPARATOR . 'h5p.classes.php';
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		new Options(self::get_endpoint_in_h5p_core());
+		add_action( 'update_option', array(self::class, 'handle_option_updated'), 10, 3);
+		add_action( 'upgrader_process_complete', array(self::class,'handle_content_type_upgraded'), 10, 2);
+		add_action( 'h5p_content_hub_manager_update_libraries', array($this, 'update_installed_h5p_libraries'), 10, 0 );
+
+		$update_schedule = Options::get_update_schedule();
+		if ( $update_schedule === 'daily' || $update_schedule === 'weekly' ) {
+			if ( ! wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' ) ) {
+				wp_schedule_event( time(), $update_schedule, 'h5p_content_hub_manager_update_libraries' );
+			}
+		}
+		else {
+			$timestamp = wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' );
+			wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );
+		}
+	}
+
+	/**
+	 * Update installed H5P libraries by checking for new versions in the content type hub.
+	 */
+	public function update_installed_h5p_libraries() {
+		$contentTypeHubConnector = new ContentTypeHubConnector();
+		$contentTypeHubConnector->install_new_content_type_versions();
+	}
+
+	/**
+	 * Handle changes to the endpoint URL base option that other plugins might use.
+	 */
+	public static function handle_option_updated($option_name, $old_value, $new_value) {
+		if ($option_name !== Options::get_slug()) {
+			return;
+		}
+
+		if (
+			!is_array( $new_value ) || !isset( $new_value['endpoint_url_base'] ) ||
+			!is_array( $old_value ) || !isset( $old_value['endpoint_url_base'] )
+		) {
+			return;
+		}
+
+		if ($new_value['endpoint_url_base'] === $old_value['endpoint_url_base']) {
+			return;
+		}
+
+		self::update_endpoint_in_h5p_core($new_value['endpoint_url_base']);
+
+		return;
+	}
+
+	/**
+	 * Handle H5P content type upgrade to overwrite the endpoint URL in H5P core.
+	 *
+	 * @param \WP_Upgrader $upgrader The upgrader instance.
+	 * @param array        $hook_extra Extra information about the upgrade.
+	 */
+	public static function handle_content_type_upgraded($upgrader, $hook_extra) {
+		if ( !isset( $hook_extra['action'] ) || $hook_extra['action'] !== 'update' ) {
+			return;
+		}
+
+		if ( !isset( $hook_extra['type'] ) || $hook_extra['type'] !== 'plugin' ) {
+			return;
+		}
+
+		if ($hook_extra['plugins'][0] !== 'h5p') {
+			return;
+		}
+
+		self::update_endpoint_in_h5p_core(Options::get_endpoint_url_base());
+	}
+
+	/**
+	 * Get the currently set endpoint URL from H5P core.
+	 *
+	 * @return string The endpoint URL base.
+	 */
+	public static function get_endpoint_in_h5p_core() {
+		if ( ! file_exists( self::$H5P_CLASSES_FILE_PATH ) ) {
+			return [];
+		}
+
+		$file_content = file_get_contents( self::$H5P_CLASSES_FILE_PATH );
+
+		preg_match_all(
+			"/CONTENT_TYPES = '(.+?)\/content-types\/';/",
+			$file_content,
+			$matches
+		);
+
+		return $matches[1];
+	}
+
+	/**
+	 * Update the endpoint URL in H5P core. Will patch the H5P classes file.
+	 *
+	 * @param string $endpoint_url_base The new endpoint URL base.
+	 */
+	public static function update_endpoint_in_h5p_core($endpoint_url_base) {
+		if ( ! current_user_can('manage_h5p_content_type_hub') ) {
+			return;
+		}
+
+		if ( ! file_exists( self::$H5P_CLASSES_FILE_PATH ) ) {
+			return;
+		}
+
+		$file_content = file_get_contents( self::$H5P_CLASSES_FILE_PATH );
+
+		$file_content = preg_replace(
+			"/(CONTENT_TYPES = ')(.*)(\/content-types\/';)/",
+			'$1' . $endpoint_url_base . '$3',
+			$file_content
+		);
+
+		file_put_contents( self::$H5P_CLASSES_FILE_PATH, $file_content );
+	}
+}

@@ -1,0 +1,33 @@
+name: Release ZIP Build
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write  # Ensures the workflow can upload assets to a release
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create ZIP file
+        run: |
+          set -e
+          ZIP_NAME="sustainum-h5p-local-user-data.zip"
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+          zip -rq "$ZIP_NAME" . \
+            -x ".github/*" ".git/*" ".gitignore" \
+            "node_modules/*" "package-lock.json" "package.json" "phpcs.xml" \
+            "eslint.config.js"
+
+      - name: Upload ZIP to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
