@@ -141,6 +141,7 @@ class Main {
 	public static function update_endpoint_in_h5p_core( $endpoint_url_base ) {
 		global $wp_filesystem;
 
+		// phpcs:ignore WordPress.WP.Capabilities.Unknown -- Capability is set by H5P.
 		if ( ! current_user_can( 'manage_h5p_content_type_hub' ) ) {
 			return;
 		}
