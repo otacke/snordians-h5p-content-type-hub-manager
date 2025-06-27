@@ -1,0 +1,348 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sustainum H5P Content Type Hub Manager\n"
+"POT-Creation-Date: 2025-06-27 10:43+0200\n"
+"PO-Revision-Date: 2025-06-27 10:43+0200\n"
+"Last-Translator: Sustainum-H5P-Content-Type-Hub-Manager\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: sustainum-h5p-content-type-hub-manager.php\n"
+"X-Poedit-SearchPath-1: includes/class-capabilities.php\n"
+"X-Poedit-SearchPath-2: includes/class-content-type-hub-connector.php\n"
+"X-Poedit-SearchPath-3: includes/class-main.php\n"
+"X-Poedit-SearchPath-4: includes/class-options.php\n"
+
+#: includes/class-options.php:115
+msgid "H5P Content Type Hub Manager"
+msgstr "H5P-Content-Type-Hub-Manager"
+
+#: includes/class-options.php:141
+msgid "General"
+msgstr "Allgemein"
+
+#: includes/class-options.php:148
+msgid "URL"
+msgstr "URL"
+
+#: includes/class-options.php:156
+msgid "Schedule automated updates"
+msgstr "Zeitplan für automatische Updates festlegen"
+
+#: includes/class-options.php:213
+#, php-format
+msgid ""
+"Set the desired base URL for the H5P Content Type Hub Manager. Default is %s"
+msgstr ""
+"Lege den gewünschten Basis-URL für den H5P-Content-Type-Hub-Manager fest. "
+"Der ursprüngliche Wert ist %s"
+
+#: includes/class-options.php:228
+msgid "Never"
+msgstr "Nie"
+
+#: includes/class-options.php:229
+msgid "Daily"
+msgstr "Täglich"
+
+#: includes/class-options.php:230
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#: includes/class-options.php:241
+msgid ""
+"Choose how often to automatically update H5P content types that are already "
+"installed from the Hub."
+msgstr ""
+"Wähle, wie oft H5P-Inhaltstypen, die bereits installiert sind, automatisch "
+"vom Hub aktualisiert werden."
+
+#, php-format
+#~ msgid "Error fetching content types: %s"
+#~ msgstr "Fehler beim Holen der Inhaltstypen: %s"
+
+#, php-format
+#~ msgid "Error fetching content type %s: %s"
+#~ msgstr "Fehler beim Holen des Inhaltstyps %s: %s"
+
+#, php-format
+#~ msgid "Could not open file %s for writing."
+#~ msgstr "Konnte die Datei %s nicht zum Schreiben öffnen."
+
+#, php-format
+#~ msgid "Could not write to file %s."
+#~ msgstr "Konnte nicht in Datei %s schreiben."
+
+#~ msgid "Actor Id"
+#~ msgstr "Akteur ID"
+
+#~ msgid "Actor Name"
+#~ msgstr "Akteur Name"
+
+#~ msgid "Actor Group Members"
+#~ msgstr "Akteur Gruppenmitglieder"
+
+#~ msgid "Verb Id"
+#~ msgstr "Verb ID"
+
+#~ msgid "Verb Display"
+#~ msgstr "Verb Anzeige"
+
+#~ msgid "Object Id"
+#~ msgstr "Objekt ID"
+
+#~ msgid "Object Def. Name"
+#~ msgstr "Objekt Def. Name"
+
+#~ msgid "Object Def. Description"
+#~ msgstr "Objekt Def. Beschreibung"
+
+#~ msgid "Object Def. Choices"
+#~ msgstr "Objekt Auswahlmöglichkeiten"
+
+#~ msgid "Object Def. Correct Responses"
+#~ msgstr "Objekt Def. Richtige Antworten"
+
+#~ msgid "Result Response"
+#~ msgstr "Ergebnis Antwort"
+
+#~ msgid "Result Score Raw"
+#~ msgstr "Ergebnis Punkte"
+
+#~ msgid "Result Score Scaled"
+#~ msgstr "Ergebnis Punkte, skaliert"
+
+#~ msgid "Result Completion"
+#~ msgstr "Ergebnis Abgeschlossen"
+
+#~ msgid "Result Success"
+#~ msgstr "Ergebnis Erfolg"
+
+#~ msgid "Result Duration"
+#~ msgstr "Ergebnis Dauer"
+
+#~ msgid "Time"
+#~ msgstr "Zeit"
+
+#~ msgid "xAPI"
+#~ msgstr "xAPI"
+
+#~ msgid "WP User ID"
+#~ msgstr "WP User ID"
+
+#~ msgid "H5P Content ID"
+#~ msgstr "H5P Content ID"
+
+#~ msgid "H5P Subcontent ID"
+#~ msgstr "H5P Subcontent ID"
+
+#~ msgid ""
+#~ "Please note: Activating this option may lead to unexpected xAPI "
+#~ "statements (in high numbers) if others embed your content somewhere. Your "
+#~ "server will have to cope with all these statements."
+#~ msgstr ""
+#~ "Bitte beachten: Das Einschalten dieser Option kann zu unerwarteten xAPI-"
+#~ "Statements (in hoher Zahl) führen, wenn andere deinen Inhalt irgendwo "
+#~ "einbetten. Dein Server wird all diese Statements verarbeiten müssen."
+
+#~ msgid "Store complete statements"
+#~ msgstr "Komplette Statements speichern"
+
+#~ msgid "Debug"
+#~ msgstr "Debug"
+
+#~ msgid "Embed support"
+#~ msgstr "Einbetten unterstützen"
+
+#~ msgid "Capture everything"
+#~ msgstr "Alles aufzeichnen"
+
+#~ msgid "Visible columns"
+#~ msgstr "Sichtbare Spalten"
+
+#~ msgid ""
+#~ "By checking the column titles below you can select if the corresponding "
+#~ "columns will be displayed by default."
+#~ msgstr ""
+#~ "Durch das Anwählen einzelner Spaltentitel kannst du auswählen, welche "
+#~ "Spalten standardmäßig angezeigt werden."
+
+#~ msgid ""
+#~ "By checking the H5P content types below you can select their xAPI "
+#~ "statements for being captured."
+#~ msgstr ""
+#~ "Durch das Anwählen einzelner H5P-Inhaltstypen kannst du auswählen, für "
+#~ "welche die xAPI-Statements aufgezeichnet werden sollen."
+
+#~ msgid ""
+#~ "Store the complete xAPI statement as JSON data. Be sure to check your "
+#~ "database storage limit!"
+#~ msgstr ""
+#~ "Speichere die kompletten xAPI-Statements als JSON-Daten. Prüfe vorher den "
+#~ "Speicherplatz deiner Datenbank!"
+
+#~ msgid "Display xAPI statements in the JavaScript debug console"
+#~ msgstr "Zeige die xAPI-Statements in der JavaScript-Debug-Konsole"
+
+#~ msgid ""
+#~ "Accept xAPI statements from your content that is embedded on other pages"
+#~ msgstr ""
+#~ "Akzeptiere xAPI-Statements von deinen Inhalten, die auf anderen Seiten "
+#~ "eingebettet sind"
+
+#~ msgid "Capture the xAPI statements of all H5P content types"
+#~ msgstr "Schneide die xAPI-Statements aller H5P-Inhaltstypen mit"
+
+#~ msgid "It seems there are no column titles defined. Wicked!"
+#~ msgstr "Es scheint as seien keine Spaltentitel festgelegt. Seltsam!"
+
+#~ msgid "Column title"
+#~ msgstr "Spaltentitel"
+
+#~ msgid "It seems that H5P is not installed on this WordPress system."
+#~ msgstr ""
+#~ "Es scheint, als wäre H5P auf diesem WordPress-System nicht installiert."
+
+#~ msgid "Title"
+#~ msgstr "Titel"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Id"
+#~ msgstr "ID"
+
+#~ msgid "What personal data we collect and why we collect it"
+#~ msgstr ""
+#~ "Welche personenbezogenen Daten wir sammeln und warum wir sie sammeln"
+
+#~ msgid "H5PxAPIkatchu"
+#~ msgstr "H5PxAPIkatchu"
+
+#, php-format
+#~ msgid ""
+#~ "When you use interactive content, we may collect data about your "
+#~ "interaction using %s."
+#~ msgstr ""
+#~ "Wenn du interaktive Inhalte benutzt, können Daten über deine "
+#~ "Interaktionen mittels %s gesammelt werden."
+
+#~ msgid ""
+#~ "The data may e.g. contain what answer was given, how long it took to "
+#~ "answer, what score was achieved, etc."
+#~ msgstr ""
+#~ "Die Daten können beispielsweise umfassen, welche Antworten gegeben "
+#~ "wurden, wie lange zum Antworten benötigt wurde, welche Punktzahl erreicht "
+#~ "wurde, usw."
+
+#~ msgid ""
+#~ "We use the data to learn about how well the interaction is designed and "
+#~ "how it could be adapted to improve the usability and learning outcomes in "
+#~ "general."
+#~ msgstr ""
+#~ "Wir nutzen die Daten um zu lernen, wie gut die Interaktionen entworfen "
+#~ "wurden und wie sie angepasst werden könnten, um die Bedienung und die "
+#~ "Lernergebnisse zu verbessern."
+
+#~ msgid ""
+#~ "However, if and only if you are logged in, this data will be tied to your "
+#~ "full name, your email address, and your WordPress user id."
+#~ msgstr ""
+#~ "Wenn du allerdings auf der Plattform angemeldet bist, werden diese Daten "
+#~ "mit deinem vollen Namen, deiner E-Mail-Adresse und deiner WordPress-"
+#~ "Benutzer-ID verknüpft."
+
+#~ msgid "In consequence, your interactions could be linked to you."
+#~ msgstr ""
+#~ "Infolgedessen können deine Interaktionen mit dir in Verbindung gebracht "
+#~ "werden."
+
+#~ msgid "Therefore, all personal data can be stripped to anonymize the data."
+#~ msgstr ""
+#~ "Daher ist es möglich, alle persönlichen Daten anonymisieren zu lassen."
+
+# This item is for DataTables. It uses _START_ and _END_ and _TOTAL_ als placeholders. Don't translate these.
+#~ msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+#~ msgstr "Zeige _START_ bis _END_ von _TOTAL_ Einträgen"
+
+#~ msgid "Showing 0 to 0 of 0 entries"
+#~ msgstr "Zeige 0 bis 0 von 0 Einträgen"
+
+#~ msgid "filtered from _MAX_ total entries"
+#~ msgstr "gefiltert aus _MAX_ Einträgen insgesamt"
+
+#~ msgid "Show _MENU_ entries"
+#~ msgstr "Zeige _MENU_ Einträge"
+
+#~ msgid "Loading..."
+#~ msgstr "Wird geladen..."
+
+#~ msgid "Processing..."
+#~ msgstr "Bitte warten..."
+
+#~ msgid "Search"
+#~ msgstr "Suchen"
+
+#~ msgid "No matching records found"
+#~ msgstr "Keine Einträge vorhanden."
+
+#~ msgid "First"
+#~ msgstr "Erste"
+
+#~ msgid "Last"
+#~ msgstr "Letzte"
+
+#~ msgid "Next"
+#~ msgstr "Nächste"
+
+#~ msgid "Previous"
+#~ msgstr "Vorherige"
+
+#~ msgid "Download"
+#~ msgstr "Herunterladen"
+
+#~ msgid "Show/hide columns"
+#~ msgstr "Zeige/verstecke Spalten"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "Do you really want to delete all the data?"
+#~ msgstr "Willst du wirklich alle Daten löschen?"
+
+#~ msgid "Sorry, something went wrong with deleting the data."
+#~ msgstr "Entschuldigung. Beim Löschen der Daten ging etwas schief."
+
+#~ msgid "You do not have sufficient permissions to access this page."
+#~ msgstr "Du hast nicht genügend Rechte, um diese Seite aufzurufen."
+
+#~ msgid "There is no xAPI information stored."
+#~ msgstr "Es sind keine xAPI-Informationen gespeichert."
+
+#~ msgid "Group"
+#~ msgstr "Gruppe"
+
+#~ msgid "email"
+#~ msgstr "E-Mail-Adresse"
+
+#~ msgid "email hash"
+#~ msgstr "E-Mail-Hashwert"
+
+#~ msgid "openid"
+#~ msgstr "OpenID"
+
+#~ msgid "account"
+#~ msgstr "Konto"
+
+#~ msgid "search"
+#~ msgstr "Suchen"
+
+#~ msgid "Column Visibility"
+#~ msgstr "Zeige/verstecke Spalten"

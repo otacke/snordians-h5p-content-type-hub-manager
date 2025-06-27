@@ -210,7 +210,7 @@ class Options {
 		<p id="output-url" class="description">
 			<?php			echo esc_html(
 				sprintf(
-					__( 'Set the desired base URL for the H5P Content Type Hub Manager. Default is %s' ),
+					__( 'Set the desired base URL for the H5P Content Type Hub Manager. Default is %s', 'sustainum-h5p-content-type-hub-manager' ),
 					esc_html( self::DEFAULT_ENDPOINT_URL_BASE )
 				)
 			);

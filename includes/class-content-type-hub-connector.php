@@ -44,7 +44,7 @@ class ContentTypeHubConnector {
 
     $result = new \stdClass();
 
-    $error_message = __('Error fetching content types: %s');
+    $error_message = 'Error fetching content types: %s';
 
     if (is_wp_error($response)) {
       $result->error = sprintf($error_message, $response->get_error_message());
@@ -198,7 +198,7 @@ class ContentTypeHubConnector {
 
     if (is_wp_error($response)) {
       $result->error = sprintf(
-        __('Error fetching content type %s: %s'),
+        'Error fetching content type %s: %s',
         $library['machineName'],
         $response->get_error_message()
       );
@@ -306,7 +306,7 @@ class ContentTypeHubConnector {
     if (!$file_handle) {
       fclose($file_handle);
       $result->error = sprintf(
-        __('Could not open file %s for writing.'),
+        'Could not open file %s for writing.',
         $target_file_path
       );
       return $result;
@@ -315,7 +315,7 @@ class ContentTypeHubConnector {
     if (fwrite($file_handle, $file_content) === false) {
       fclose($file_handle);
       $result->error = sprintf(
-        __('Could not write to file %s.'),
+        'Could not write to file %s.',
         $target_file_path
       );
       return $result;
@@ -341,9 +341,9 @@ class ContentTypeHubConnector {
     $libraryJSON = $h5pCore->librariesJsonData[$versionedLibraryName];
     if (is_null($libraryJSON) || !array_key_exists('libraryId', $libraryJSON) ) {
       $result->error = sprintf(
-        __('Error while installing content type %s: %s'),
+        'Error while installing content type %s: %s',
         $versionedLibraryName,
-        __('Library ID is missing.')
+        'Library ID is missing.'
       );
     }
     else{
@@ -438,7 +438,7 @@ class ContentTypeHubConnector {
       return $result;
     } else if (!$validation_result->result) {
       $result->error = sprintf(
-        __('Not a valid H5P package for content type %s: %s'),
+        'Not a valid H5P package for content type %s: %s',
         $library['machineName'],
         join(' / ', $h5pFramework->getMessages('error'))
       );
