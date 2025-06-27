@@ -14,24 +14,29 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
  * Main plugin class.
  */
 class Main {
-	private static $H5P_CLASSES_FILE_PATH = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'h5p' . DIRECTORY_SEPARATOR . 'h5p-php-library' . DIRECTORY_SEPARATOR . 'h5p.classes.php';
+
+	/**
+	 * Path to the H5P classes file in the H5P plugin.
+	 *
+	 * @var string
+	 */
+	private static $h5p_classes_file_path = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'h5p' . DIRECTORY_SEPARATOR . 'h5p-php-library' . DIRECTORY_SEPARATOR . 'h5p.classes.php';
 
 	/**
 	 * Constructor.
 	 */
 	public function __construct() {
-		new Options(self::get_endpoint_in_h5p_core());
-		add_action( 'update_option', array(self::class, 'handle_option_updated'), 10, 3);
-		add_action( 'upgrader_process_complete', array(self::class,'handle_content_type_upgraded'), 10, 2);
-		add_action( 'h5p_content_hub_manager_update_libraries', array($this, 'update_installed_h5p_libraries'), 10, 0 );
+		new Options( self::get_endpoint_in_h5p_core() );
+		add_action( 'update_option', array( self::class, 'handle_option_updated' ), 10, 3 );
+		add_action( 'upgrader_process_complete', array( self::class, 'handle_content_type_upgraded' ), 10, 2 );
+		add_action( 'h5p_content_hub_manager_update_libraries', array( $this, 'update_installed_h5p_libraries' ), 10, 0 );
 
 		$update_schedule = Options::get_update_schedule();
-		if ( $update_schedule === 'daily' || $update_schedule === 'weekly' ) {
+		if ( 'daily' === $update_schedule || 'weekly' === $update_schedule ) {
 			if ( ! wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' ) ) {
 				wp_schedule_event( time(), $update_schedule, 'h5p_content_hub_manager_update_libraries' );
 			}
-		}
-		else {
+		} else {
 			$timestamp = wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' );
 			wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );
 		}
@@ -41,32 +46,34 @@ class Main {
 	 * Update installed H5P libraries by checking for new versions in the content type hub.
 	 */
 	public function update_installed_h5p_libraries() {
-		$contentTypeHubConnector = new ContentTypeHubConnector();
-		$contentTypeHubConnector->install_new_content_type_versions();
+		$content_type_hub_connector = new ContentTypeHubConnector();
+		$content_type_hub_connector->install_new_content_type_versions();
 	}
 
 	/**
 	 * Handle changes to the endpoint URL base option that other plugins might use.
+	 *
+	 * @param string $option_name The name of the option that was updated.
+	 * @param mixed  $old_value The old value of the option.
+	 * @param mixed  $new_value The new value of the option.
 	 */
-	public static function handle_option_updated($option_name, $old_value, $new_value) {
-		if ($option_name !== Options::get_slug()) {
+	public static function handle_option_updated( $option_name, $old_value, $new_value ) {
+		if ( Options::get_slug() !== $option_name ) {
 			return;
 		}
 
 		if (
-			!is_array( $new_value ) || !isset( $new_value['endpoint_url_base'] ) ||
-			!is_array( $old_value ) || !isset( $old_value['endpoint_url_base'] )
+			! is_array( $new_value ) || ! isset( $new_value['endpoint_url_base'] ) ||
+			! is_array( $old_value ) || ! isset( $old_value['endpoint_url_base'] )
 		) {
 			return;
 		}
 
-		if ($new_value['endpoint_url_base'] === $old_value['endpoint_url_base']) {
+		if ( $new_value['endpoint_url_base'] === $old_value['endpoint_url_base'] ) {
 			return;
 		}
 
-		self::update_endpoint_in_h5p_core($new_value['endpoint_url_base']);
-
-		return;
+		self::update_endpoint_in_h5p_core( $new_value['endpoint_url_base'] );
 	}
 
 	/**
@@ -75,20 +82,20 @@ class Main {
 	 * @param \WP_Upgrader $upgrader The upgrader instance.
 	 * @param array        $hook_extra Extra information about the upgrade.
 	 */
-	public static function handle_content_type_upgraded($upgrader, $hook_extra) {
-		if ( !isset( $hook_extra['action'] ) || $hook_extra['action'] !== 'update' ) {
+	public static function handle_content_type_upgraded( $upgrader, $hook_extra ) {
+		if ( ! isset( $hook_extra['action'] ) || 'update' !== $hook_extra['action'] ) {
 			return;
 		}
 
-		if ( !isset( $hook_extra['type'] ) || $hook_extra['type'] !== 'plugin' ) {
+		if ( ! isset( $hook_extra['type'] ) || 'plugin' !== $hook_extra['type'] ) {
 			return;
 		}
 
-		if ($hook_extra['plugins'][0] !== 'h5p') {
+		if ( 'h5p' !== $hook_extra['plugins'][0] ) {
 			return;
 		}
 
-		self::update_endpoint_in_h5p_core(Options::get_endpoint_url_base());
+		self::update_endpoint_in_h5p_core( Options::get_endpoint_url_base() );
 	}
 
 	/**
@@ -104,17 +111,17 @@ class Main {
 		}
 
 		if ( ! WP_Filesystem() ) {
-			return [];
+			return array();
 		}
 
-		if ( ! $wp_filesystem->exists( self::$H5P_CLASSES_FILE_PATH ) ) {
-			return [];
+		if ( ! $wp_filesystem->exists( self::$h5p_classes_file_path ) ) {
+			return array();
 		}
 
-		$file_content = $wp_filesystem->get_contents( self::$H5P_CLASSES_FILE_PATH );
+		$file_content = $wp_filesystem->get_contents( self::$h5p_classes_file_path );
 
 		if ( false === $file_content ) {
-			return [];
+			return array();
 		}
 
 		preg_match_all(
@@ -131,10 +138,10 @@ class Main {
 	 *
 	 * @param string $endpoint_url_base The new endpoint URL base.
 	 */
-	public static function update_endpoint_in_h5p_core($endpoint_url_base) {
+	public static function update_endpoint_in_h5p_core( $endpoint_url_base ) {
 		global $wp_filesystem;
 
-		if ( ! current_user_can('manage_h5p_content_type_hub') ) {
+		if ( ! current_user_can( 'manage_h5p_content_type_hub' ) ) {
 			return;
 		}
 
@@ -146,11 +153,11 @@ class Main {
 			return;
 		}
 
-		if ( ! $wp_filesystem->exists( self::$H5P_CLASSES_FILE_PATH ) ) {
+		if ( ! $wp_filesystem->exists( self::$h5p_classes_file_path ) ) {
 			return;
 		}
 
-		$file_content = $wp_filesystem->get_contents( self::$H5P_CLASSES_FILE_PATH );
+		$file_content = $wp_filesystem->get_contents( self::$h5p_classes_file_path );
 
 		if ( false === $file_content ) {
 			return;
@@ -162,6 +169,6 @@ class Main {
 			$file_content
 		);
 
-		$wp_filesystem->put_contents( self::$H5P_CLASSES_FILE_PATH, $file_content, FS_CHMOD_FILE );
+		$wp_filesystem->put_contents( self::$h5p_classes_file_path, $file_content, FS_CHMOD_FILE );
 	}
 }

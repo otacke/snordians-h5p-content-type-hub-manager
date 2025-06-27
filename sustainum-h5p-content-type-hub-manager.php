@@ -18,10 +18,10 @@ namespace Sustainum\H5PContentTypeHubManager;
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
 // In theory, the scheduling should work without this, but in practice it does not.
-define('ALTERNATE_WP_CRON', true);
+define( 'ALTERNATE_WP_CRON', true );
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-capabilities.php';
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-content-type-hub-connector.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-contenttypehubconnector.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-main.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-options.php';
 
@@ -31,7 +31,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 
  * @return object NDLAH5PCARETAKER
  */
 function init() {
-	if ( !is_admin() ) {
+	if ( ! is_admin() ) {
 		return;
 	}
 
@@ -60,7 +60,7 @@ function on_deactivation() {
 function on_uninstall() {
 	Options::delete_options();
 	Capabilities::remove_capabilities();
-	Main::update_endpoint_in_h5p_core(Options::get_default_endpoint_url_base());
+	Main::update_endpoint_in_h5p_core( Options::get_default_endpoint_url_base() );
 
 	$timestamp = wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' );
 	wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );

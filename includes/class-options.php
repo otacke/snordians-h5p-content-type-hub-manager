@@ -38,6 +38,11 @@ class Options {
 	 */
 	private static $option_slug = 'sustainumh5pcontenttypehubmanager_option';
 
+	/**
+	 * Current endpoint URL base.
+	 *
+	 * @var string
+	 */
 	private static $current_endpoint_url_base;
 
 	/**
@@ -50,14 +55,19 @@ class Options {
 	/**
 	 * Start up
 	 *
-	 * @since 0.1.0
+	 * @param string $current_endpoint_url_base The current endpoint URL base.
 	 */
-	public function __construct($current_endpoint_url_base = self::DEFAULT_ENDPOINT_URL_BASE) {
+	public function __construct( $current_endpoint_url_base = self::DEFAULT_ENDPOINT_URL_BASE ) {
 		self::$current_endpoint_url_base = $current_endpoint_url_base;
 		add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
 		add_action( 'admin_init', array( $this, 'page_init' ) );
 	}
 
+	/**
+	 * Get the option slug.
+	 *
+	 * @return string Option slug.
+	 */
 	public static function get_slug() {
 		return self::$option_slug;
 	}
@@ -78,7 +88,7 @@ class Options {
 			self::$option_slug,
 			array(
 				'endpoint_url_base' => self::$current_endpoint_url_base,
-				'update_schedule' => self::DEFAULT_UPDATE_SCHEDULE,
+				'update_schedule'   => self::DEFAULT_UPDATE_SCHEDULE,
 			)
 		);
 	}
@@ -179,8 +189,8 @@ class Options {
 		// Ensure the URL does not end with a slash.
 		$new_input['endpoint_url_base'] = rtrim( $new_input['endpoint_url_base'], '/' );
 
-		$valid_schedules = array( 'never', 'daily', 'weekly' );
-		$new_input['update_schedule'] = in_array( $input['update_schedule'], $valid_schedules ) ?
+		$valid_schedules              = array( 'never', 'daily', 'weekly' );
+		$new_input['update_schedule'] = in_array( $input['update_schedule'], $valid_schedules, true ) ?
 			$input['update_schedule'] :
 			self::DEFAULT_UPDATE_SCHEDULE;
 
@@ -208,13 +218,14 @@ class Options {
 			value="<?php echo esc_attr( self::get_endpoint_url_base() ); ?>"
 		/>
 		<p id="output-url" class="description">
-			<?php			echo esc_html(
-				sprintf(
+			<?php
+				echo esc_html(
+					sprintf(
 					// Translators: %s is the default endpoint URL base of H5P Group's Content Type Hub.
-					__( 'Set the desired base URL for the H5P Content Type Hub Manager. Default is %s', 'sustainum-h5p-content-type-hub-manager' ),
-					esc_html( self::DEFAULT_ENDPOINT_URL_BASE )
-				)
-			);
+						__( 'Set the desired base URL for the H5P Content Type Hub Manager. Default is %s', 'sustainum-h5p-content-type-hub-manager' ),
+						esc_html( self::DEFAULT_ENDPOINT_URL_BASE )
+					)
+				);
 			?>
 		</p>
 		<?php
@@ -225,9 +236,9 @@ class Options {
 	 */
 	public function update_schedule_callback() {
 		$current_schedule = self::get_update_schedule();
-		$schedules = array(
-			'never' => __( 'Never', 'sustainum-h5p-content-type-hub-manager' ),
-			'daily' => __( 'Daily', 'sustainum-h5p-content-type-hub-manager' ),
+		$schedules        = array(
+			'never'  => __( 'Never', 'sustainum-h5p-content-type-hub-manager' ),
+			'daily'  => __( 'Daily', 'sustainum-h5p-content-type-hub-manager' ),
 			'weekly' => __( 'Weekly', 'sustainum-h5p-content-type-hub-manager' ),
 		);
 		?>
