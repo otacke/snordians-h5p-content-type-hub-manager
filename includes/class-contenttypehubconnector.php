@@ -129,7 +129,7 @@ class ContentTypeHubConnector {
 	  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- H5P table access required for library restriction check
 		$result = (int) ( $wpdb->get_var(
 			$wpdb->prepare(
-				'SELECT restricted FROM %s WHERE name = %s AND major_version = %d AND minor_version = %d',
+				'SELECT restricted FROM %i WHERE name = %s AND major_version = %d AND minor_version = %d',
 				$wpdb->prefix . 'h5p_libraries',
 				$machine_name,
 				$major,
