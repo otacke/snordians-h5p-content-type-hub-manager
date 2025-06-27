@@ -117,13 +117,11 @@ class ContentTypeHubConnector {
       return false;
     }
 
-    $table_name = $wpdb->prefix . 'h5p_libraries';
-    $query = $wpdb->prepare(
-      "SELECT restricted FROM {$table_name} WHERE name = %s AND major_version = %d AND minor_version = %d",
-      $machine_name, $major, $minor
-    );
-
-    $result = (int) ($wpdb->get_var($query) ?? 0);
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- H5P table access required for library restriction check
+    $result = (int) ($wpdb->get_var($wpdb->prepare(
+      "SELECT restricted FROM %s WHERE name = %s AND major_version = %d AND minor_version = %d",
+      $wpdb->prefix . 'h5p_libraries', $machine_name, $major, $minor
+    )) ?? 0);
 
     return $result === 1;
   }
@@ -149,17 +147,14 @@ class ContentTypeHubConnector {
       return;
     }
 
-    $table_name = $wpdb->prefix . 'h5p_libraries';
-    $set_clause = implode(', ', array_map(function ($key) {
-      return "{$key} = %s";
-    }, array_keys($params)));
-
-    $query = $wpdb->prepare(
-      "UPDATE {$table_name} SET {$set_clause} WHERE id = %d",
-      ...array_merge(array_values($params), [$libraryId])
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+    $wpdb->update(
+      $wpdb->prefix . 'h5p_libraries',
+      $params,
+      array('id' => $libraryId),
+      array('%s'), // format for data
+      array('%d')  // format for where clause
     );
-
-    $wpdb->query($query);
   }
 
   /**
@@ -299,29 +294,27 @@ class ContentTypeHubConnector {
    * @return \stdClass An object containing the result or error message.
    */
   private static function write_archive_to_temporary_file($file_content, $target_file_path) {
+    global $wp_filesystem;
+
     $result = new \stdClass();
     $result->error = null;
 
-    $file_handle = fopen($target_file_path, 'w');
-    if (!$file_handle) {
-      fclose($file_handle);
-      $result->error = sprintf(
-        'Could not open file %s for writing.',
-        $target_file_path
-      );
+    if ( ! function_exists( 'WP_Filesystem' ) ) {
+      require_once ABSPATH . 'wp-admin/includes/file.php';
+    }
+
+    if ( ! WP_Filesystem() ) {
+      $result->error = 'Could not initialize WordPress filesystem.';
       return $result;
     }
 
-    if (fwrite($file_handle, $file_content) === false) {
-      fclose($file_handle);
+    if ( ! $wp_filesystem->put_contents( $target_file_path, $file_content, FS_CHMOD_FILE ) ) {
       $result->error = sprintf(
         'Could not write to file %s.',
         $target_file_path
       );
       return $result;
     }
-
-    fclose($file_handle);
 
     return $result;
   }
@@ -359,6 +352,7 @@ class ContentTypeHubConnector {
   public function install_new_content_type_versions() {
     $content_types = self::fetch_latest_content_types();
     if (!empty($content_types->error)) {
+      // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Admins are supposed to see this in the log!
       error_log( SLUG . ': ' . $content_types->error );
       return;
     }
@@ -394,6 +388,7 @@ class ContentTypeHubConnector {
 
       $result = self::install_content_type($library);
       if (isset($result->error)) {
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log-- Admins are supposed to see this in the log!
         error_log(SLUG . ': ' . $result->error);
       }
     }

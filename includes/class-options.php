@@ -210,6 +210,7 @@ class Options {
 		<p id="output-url" class="description">
 			<?php			echo esc_html(
 				sprintf(
+					// Translators: %s is the default endpoint URL base of H5P Group's Content Type Hub.
 					__( 'Set the desired base URL for the H5P Content Type Hub Manager. Default is %s', 'sustainum-h5p-content-type-hub-manager' ),
 					esc_html( self::DEFAULT_ENDPOINT_URL_BASE )
 				)

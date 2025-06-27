@@ -97,11 +97,25 @@ class Main {
 	 * @return string The endpoint URL base.
 	 */
 	public static function get_endpoint_in_h5p_core() {
-		if ( ! file_exists( self::$H5P_CLASSES_FILE_PATH ) ) {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		if ( ! WP_Filesystem() ) {
 			return [];
 		}
 
-		$file_content = file_get_contents( self::$H5P_CLASSES_FILE_PATH );
+		if ( ! $wp_filesystem->exists( self::$H5P_CLASSES_FILE_PATH ) ) {
+			return [];
+		}
+
+		$file_content = $wp_filesystem->get_contents( self::$H5P_CLASSES_FILE_PATH );
+
+		if ( false === $file_content ) {
+			return [];
+		}
 
 		preg_match_all(
 			"/CONTENT_TYPES = '(.+?)\/content-types\/';/",
@@ -118,15 +132,29 @@ class Main {
 	 * @param string $endpoint_url_base The new endpoint URL base.
 	 */
 	public static function update_endpoint_in_h5p_core($endpoint_url_base) {
+		global $wp_filesystem;
+
 		if ( ! current_user_can('manage_h5p_content_type_hub') ) {
 			return;
 		}
 
-		if ( ! file_exists( self::$H5P_CLASSES_FILE_PATH ) ) {
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		if ( ! WP_Filesystem() ) {
 			return;
 		}
 
-		$file_content = file_get_contents( self::$H5P_CLASSES_FILE_PATH );
+		if ( ! $wp_filesystem->exists( self::$H5P_CLASSES_FILE_PATH ) ) {
+			return;
+		}
+
+		$file_content = $wp_filesystem->get_contents( self::$H5P_CLASSES_FILE_PATH );
+
+		if ( false === $file_content ) {
+			return;
+		}
 
 		$file_content = preg_replace(
 			"/(CONTENT_TYPES = ')(.*)(\/content-types\/';)/",
@@ -134,6 +162,6 @@ class Main {
 			$file_content
 		);
 
-		file_put_contents( self::$H5P_CLASSES_FILE_PATH, $file_content );
+		$wp_filesystem->put_contents( self::$H5P_CLASSES_FILE_PATH, $file_content, FS_CHMOD_FILE );
 	}
 }
