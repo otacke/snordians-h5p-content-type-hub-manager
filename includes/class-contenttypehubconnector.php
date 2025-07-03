@@ -386,13 +386,13 @@ class ContentTypeHubConnector {
 			return;
 		}
 
-    // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Out of our control.
+		// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Out of our control.
 		foreach ( $content_types->contentTypes as $content_type ) {
 			if ( self::is_content_type_restricted( $content_type->id, $content_type->version->major, $content_type->version->minor ) ) {
 				continue; // Admin has restricted use of this content type.
 			}
 
-      // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Out of our control.
+      		// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Out of our control.
 			if ( ! self::is_required_core_api( $content_type->coreApiVersionNeeded ) ) {
 				continue; // Content type to be installed is not compatible with the installed H5P core version.
 			}
@@ -411,9 +411,8 @@ class ContentTypeHubConnector {
 				$library['tutorial'] = $content_type->tutorial;
 			}
 
-			// Note that libraries which are not yet installed will not be installed.
-			$is_installed_library_newer_patched_version = $this->h5p_framework->isPatchedLibrary( $library ) === false;
-			if ( $is_installed_library_newer_patched_version ) {
+			$is_library_newer_than_installed = $this->is_library_newer_than_installed( $library );
+			if ( ! $is_library_newer_than_installed ) {
 				continue; // Content type is already installed and up to date.
 			}
 
@@ -423,6 +422,50 @@ class ContentTypeHubConnector {
 				error_log( self::SLUG . ': ' . $result->error );
 			}
 		}
+	}
+
+	/**
+	 * Check if the offered library version is newer than the installed version.
+	 *
+	 * @param array $library The library information.
+	 * @return bool True if the offered library version is newer than the installed version, false otherwise.
+	 */
+	public function is_library_newer_than_installed( $library ) {
+		global $wpdb;
+
+		$library_id = $this->h5p_framework->getLibraryId( $library['machineName'] );
+		if ( ! $library_id ) {
+			return false; // Library is not installed.
+		}
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- H5P table access required for library version check
+		$installed_version = $wpdb->get_row(
+			$wpdb->prepare(
+				'SELECT major_version, minor_version, patch_version FROM %i WHERE id = %d',
+				$wpdb->prefix . 'h5p_libraries',
+				$library_id
+			),
+			ARRAY_A
+		);
+
+		if ( $installed_version['major_version'] > $library['majorVersion'] ) {
+			return false; // Installed version is newer.
+		}
+		if ( $installed_version['major_version'] < $library['majorVersion'] ) {
+			return true; // Offered version is newer.
+		}
+
+		if ( $installed_version['minor_version'] > $library['minorVersion'] ) {
+			return false; // Installed version is newer.
+		}
+		if ( $installed_version['minor_version'] < $library['minorVersion'] ) {
+			return true; // Offered version is newer.
+		}
+		if ( $installed_version['patch_version'] > $library['patchVersion'] ) {
+			return false; // Installed version is newer.
+		}
+
+		return true;
 	}
 
 	/**
