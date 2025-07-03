@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/otacke/sustainum-h5p-content-type-hub-manager
  * Text Domain: sustainum-h5p-content-type-hub-manager
  * Description: Manage the H5P Content Type Hub.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Sustainum, Oliver Tacke (SNORDIAN)
  * Author URI: https://snordian.de
  * License: MIT

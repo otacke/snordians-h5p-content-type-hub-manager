@@ -3,7 +3,7 @@ Contributors: otacke
 Tags: h5p, catharsis
 Requires at least: 6.2
 Tested up to: 6.8
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: MIT
 License URI: https://github.com/otacke/sustainum-h5p-content-type-hub-manager/blob/master/LICENSE
 
