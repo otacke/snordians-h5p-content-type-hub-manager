@@ -139,7 +139,6 @@ class Options {
 	 */
 	public function page_init() {
 		// The `sanitize` function properly sanitizes all input.
-		// phpcs:ignore PluginCheck.CodeAnalysis.SettingSanitization.register_settingDynamic
 		register_setting(
 			'sustainumh5pcontenttypehubmanager_option_group',
 			'sustainumh5pcontenttypehubmanager_option',

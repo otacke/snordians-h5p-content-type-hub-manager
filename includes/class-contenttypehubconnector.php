@@ -134,7 +134,7 @@ class ContentTypeHubConnector {
 			return false;
 		}
 
-	  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- H5P table access required for library restriction check
+	  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Not feasible here, won't be called repeatedly with same params.
 		$result = (int) ( $wpdb->get_var(
 			$wpdb->prepare(
 				'SELECT restricted FROM %i WHERE name = %s AND major_version = %d AND minor_version = %d',
@@ -169,7 +169,7 @@ class ContentTypeHubConnector {
 			return;
 		}
 
-	  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+	  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Not feasible here.
 		$wpdb->update(
 			$wpdb->prefix . 'h5p_libraries',
 			$params,
@@ -403,7 +403,7 @@ class ContentTypeHubConnector {
 				continue; // Admin has restricted use of this content type.
 			}
 
-      		// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Out of our control.
+    	// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- Out of our control.
 			if ( ! self::is_required_core_api( $content_type->coreApiVersionNeeded ) ) {
 				continue; // Content type to be installed is not compatible with the installed H5P core version.
 			}
@@ -449,7 +449,7 @@ class ContentTypeHubConnector {
 			return false; // Library is not installed.
 		}
 
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- H5P table access required for library version check
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Not feasible here, won't be called repeatedly with same params.
 		$installed_version = $wpdb->get_row(
 			$wpdb->prepare(
 				'SELECT major_version, minor_version, patch_version FROM %i WHERE id = %d',
