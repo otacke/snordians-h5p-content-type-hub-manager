@@ -382,7 +382,7 @@ class ContentTypeHubConnector {
 		$content_types = self::fetch_latest_content_types();
 		if ( ! empty( $content_types->error ) ) {
 		  // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Admins are supposed to see this in the log!
-			error_log( SLUG . ': ' . $content_types->error );
+			error_log( self::SLUG . ': ' . $content_types->error );
 			return;
 		}
 
@@ -420,7 +420,7 @@ class ContentTypeHubConnector {
 			$result = self::install_content_type( $library );
 			if ( isset( $result->error ) ) {
 			  // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Admins are supposed to see this in the log!
-				error_log( SLUG . ': ' . $result->error );
+				error_log( self::SLUG . ': ' . $result->error );
 			}
 		}
 	}
