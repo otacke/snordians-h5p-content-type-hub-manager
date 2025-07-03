@@ -74,6 +74,15 @@ class Main {
 		}
 
 		self::update_endpoint_in_h5p_core( $new_value['endpoint_url_base'] );
+		self::update_content_type_hub_cache();
+	}
+
+	/**
+	 * Update the content type hub cache.
+	 */
+	public static function update_content_type_hub_cache() {
+		$content_type_hub_connector = new ContentTypeHubConnector();
+		$content_type_hub_connector->update_content_type_hub_cache();
 	}
 
 	/**

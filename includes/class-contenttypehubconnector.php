@@ -310,7 +310,7 @@ class ContentTypeHubConnector {
 	 *
 	 * @param \H5P_Plugin $h5p_framework The H5P framework instance.
 	 */
-	private static function silence_h5p_messages( $h5p_framework ) {
+	public static function silence_h5p_messages( $h5p_framework ) {
 		$h5p_framework->getMessages( 'error' );
 		$h5p_framework->getMessages( 'info' );
 	}
@@ -373,6 +373,17 @@ class ContentTypeHubConnector {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Update the content type hub cache.
+	 */
+	public function update_content_type_hub_cache() {
+		$core = \H5P_Plugin::get_instance()->get_h5p_instance( 'core' );
+		$core->updateContentTypeCache();
+
+		$h5p_framework = \H5P_Plugin::get_instance()->get_h5p_instance( 'interface' );
+		self::silence_h5p_messages( $h5p_framework );
 	}
 
 	/**
