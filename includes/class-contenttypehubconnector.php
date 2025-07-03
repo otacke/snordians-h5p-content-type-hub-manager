@@ -22,6 +22,13 @@ class ContentTypeHubConnector {
 	private const SLUG = 'sustainum-h5p-content-type-hub-manager';
 
 	/**
+	 * HTTP request timeout in seconds.
+	 *
+	 * @var int
+	 */
+	private const HTTP_TIMEOUT = 30;
+
+	/**
 	 * H5P framework instance.
 	 *
 	 * @var \H5P_Plugin
@@ -49,7 +56,8 @@ class ContentTypeHubConnector {
 		$response = wp_remote_post(
 			$endpoint_url,
 			array(
-				'body' => $postdata,
+				'body'    => $postdata,
+				'timeout' => self::HTTP_TIMEOUT,
 			)
 		);
 
@@ -204,7 +212,13 @@ class ContentTypeHubConnector {
 		$result->error = null;
 
 		$endpoint_url = self::build_api_endpoint( $library['machineName'], 'content-types' );
-		$response     = wp_remote_get( $endpoint_url );
+
+		$response = wp_remote_get(
+			$endpoint_url,
+			array(
+				'timeout' => self::HTTP_TIMEOUT,
+			)
+		);
 
 		if ( is_wp_error( $response ) ) {
 			$result->error = sprintf(
