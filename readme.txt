@@ -44,3 +44,8 @@ Please note that only content types that were already installed will be updated.
 not been installed yet will not be installed.
 Please note that only the libraries will be updated. An admin will still need to upgrade existing contents
 to use the newer libraries.
+
+== Sponsor note ==
+The plugin was developed within the [XR Energy project](https://xr-energy.eu/).
+
+"Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them.”
