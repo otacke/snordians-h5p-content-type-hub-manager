@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/otacke/snordians-h5p-content-type-hub-manager
  * Text Domain: snordians-h5p-content-type-hub-manager
  * Description: Manage the H5P Content Type Hub.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Oliver Tacke (SNORDIAN), Sustainum
  * Author URI: https://snordian.de
  * License: MIT
