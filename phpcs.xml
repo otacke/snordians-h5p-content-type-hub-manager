@@ -1,6 +1,6 @@
-<ruleset name="Sustainum H5P Content Type Hub Manager">
+<ruleset name="Snordian's H5P Content Type Hub Manager">
     <rule ref="WordPress" />
-    <file>sustainum-h5p-content-type-hub-manager.php</file>
+    <file>snordians-h5p-content-type-hub-manager.php</file>
     <file>includes/class-capabilities.php</file>
     <file>includes/class-contenttypehubconnector.php</file>
     <file>includes/class-main.php</file>

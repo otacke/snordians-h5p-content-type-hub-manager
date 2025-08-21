@@ -1,18 +1,18 @@
 <?php
 /**
- * Plugin Name: Sustainum H5P Content Type Hub Manager
- * Plugin URI: https://github.com/otacke/sustainum-h5p-content-type-hub-manager
- * Text Domain: sustainum-h5p-content-type-hub-manager
+ * Plugin Name: Snordian's H5P Content Type Hub Manager
+ * Plugin URI: https://github.com/otacke/snordians-h5p-content-type-hub-manager
+ * Text Domain: snordians-h5p-content-type-hub-manager
  * Description: Manage the H5P Content Type Hub.
  * Version: 1.0.3
- * Author: Sustainum, Oliver Tacke (SNORDIAN)
+ * Author: Oliver Tacke (SNORDIAN), Sustainum
  * Author URI: https://snordian.de
  * License: MIT
  *
- * @package sustainum-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-hub-manager
  */
 
-namespace Sustainum\H5PContentTypeHubManager;
+namespace Snordian\H5PContentTypeHubManager;
 
 // as suggested by the WordPress community.
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
@@ -71,15 +71,15 @@ function on_uninstall() {
  */
 function shcthb_load_plugin_textdomain() {
 	load_plugin_textdomain(
-		'sustainum-h5p-content-type-hub-manager',
+		'snordians-h5p-content-type-hub-manager',
 		false,
 		plugin_basename( __DIR__ ) . DIRECTORY_SEPARATOR . 'languages'
 	);
 }
 
-register_activation_hook( __FILE__, 'Sustainum\H5PContentTypeHubManager\on_activation' );
-register_deactivation_hook( __FILE__, 'Sustainum\H5PContentTypeHubManager\on_deactivation' );
-register_uninstall_hook( __FILE__, 'Sustainum\H5PContentTypeHubManager\on_uninstall' );
+register_activation_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_activation' );
+register_deactivation_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_deactivation' );
+register_uninstall_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_uninstall' );
 
-add_action( 'plugins_loaded', 'Sustainum\H5PContentTypeHubManager\shcthb_load_plugin_textdomain' );
-add_action( 'init', 'Sustainum\H5PContentTypeHubManager\init' );
+add_action( 'plugins_loaded', 'Snordian\H5PContentTypeHubManager\shcthb_load_plugin_textdomain' );
+add_action( 'init', 'Snordian\H5PContentTypeHubManager\init' );

@@ -2,10 +2,10 @@
 /**
  * Main plugin class file.
  *
- * @package sustainum-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-hub-manager
  */
 
-namespace Sustainum\H5PContentTypeHubManager;
+namespace Snordian\H5PContentTypeHubManager;
 
 // as suggested by the WordPress community.
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
