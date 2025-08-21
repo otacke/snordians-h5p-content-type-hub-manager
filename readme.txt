@@ -3,7 +3,7 @@ Contributors: otacke
 Tags: h5p, catharsis
 Requires at least: 6.2
 Tested up to: 6.9
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: MIT
 License URI: https://github.com/otacke/snordians-h5p-content-type-hub-manager/blob/master/LICENSE
 
