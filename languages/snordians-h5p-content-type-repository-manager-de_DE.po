@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Snordian's H5P Content Type Hub Manager\n"
-"POT-Creation-Date: 2025-06-27 10:43+0200\n"
-"PO-Revision-Date: 2025-06-27 10:43+0200\n"
-"Last-Translator: Snordian-H5P-Content-Type-Hub-Manager\n"
+"Project-Id-Version: Snordian's H5P Content Type Repository Manager\n"
+"POT-Creation-Date: 2025-08-21 16:11+0200\n"
+"PO-Revision-Date: 2025-08-21 16:13+0200\n"
+"Last-Translator: Sustainum-H5P-Content-Type-Hub-Manager\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -14,49 +14,50 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-SearchPath-0: snordians-h5p-content-type-hub-manager.php\n"
-"X-Poedit-SearchPath-1: includes/class-capabilities.php\n"
-"X-Poedit-SearchPath-2: includes/class-content-type-hub-connector.php\n"
-"X-Poedit-SearchPath-3: includes/class-main.php\n"
-"X-Poedit-SearchPath-4: includes/class-options.php\n"
+"X-Poedit-SearchPath-0: snordians-h5p-content-type-repository-manager.php\n"
+"X-Poedit-SearchPath-1: includes/class-contenttyperepositoryconnector.php\n"
+"X-Poedit-SearchPath-2: includes/class-main.php\n"
+"X-Poedit-SearchPath-3: includes/class-options.php\n"
+"X-Poedit-SearchPath-4: includes/class-capabilities.php\n"
 
-#: includes/class-options.php:115
-msgid "H5P Content Type Hub Manager"
-msgstr "H5P-Content-Type-Hub-Manager"
+#: includes/class-options.php:123
+msgid "H5P Content Type Repository Manager"
+msgstr "H5P-Content-Type-Repository-Manager"
 
-#: includes/class-options.php:141
+#: includes/class-options.php:148
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/class-options.php:148
+#: includes/class-options.php:155
 msgid "URL"
 msgstr "URL"
 
-#: includes/class-options.php:156
+#: includes/class-options.php:163
 msgid "Schedule automated updates"
 msgstr "Zeitplan für automatische Updates festlegen"
 
-#: includes/class-options.php:213
+#: includes/class-options.php:221
 #, php-format
 msgid ""
-"Set the desired base URL for the H5P Content Type Hub Manager. Default is %s"
+"Set the desired base URL for the H5P Content Type Repository Manager. "
+"Default is %s"
 msgstr ""
 "Lege den gewünschten Basis-URL für den H5P-Content-Type-Hub-Manager fest. "
 "Der ursprüngliche Wert ist %s"
 
-#: includes/class-options.php:228
+#: includes/class-options.php:236
 msgid "Never"
 msgstr "Nie"
 
-#: includes/class-options.php:229
+#: includes/class-options.php:237
 msgid "Daily"
 msgstr "Täglich"
 
-#: includes/class-options.php:230
+#: includes/class-options.php:238
 msgid "Weekly"
 msgstr "Wöchentlich"
 
-#: includes/class-options.php:241
+#: includes/class-options.php:249
 msgid ""
 "Choose how often to automatically update H5P content types that are already "
 "installed from the Hub."

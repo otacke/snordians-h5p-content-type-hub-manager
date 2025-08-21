@@ -1,8 +1,8 @@
-<ruleset name="Snordian's H5P Content Type Hub Manager">
+<ruleset name="Snordian's H5P Content Type Repository Manager">
     <rule ref="WordPress" />
-    <file>snordians-h5p-content-type-hub-manager.php</file>
+    <file>snordians-h5p-content-type-repository-manager.php</file>
     <file>includes/class-capabilities.php</file>
-    <file>includes/class-contenttypehubconnector.php</file>
+    <file>includes/class-contenttyperepositoryconnector.php</file>
     <file>includes/class-main.php</file>
     <file>includes/class-options.php</file>
 </ruleset>

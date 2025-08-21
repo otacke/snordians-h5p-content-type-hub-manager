@@ -2,10 +2,10 @@
 /**
  * Main plugin class file.
  *
- * @package snordians-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-repository-manager
  */
 
-namespace Snordian\H5PContentTypeHubManager;
+namespace Snordian\H5PContentTypeRepositoryManager;
 
 // as suggested by the WordPress community.
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 /**
  * Main plugin class.
  */
-class ContentTypeHubConnector {
+class ContentTypeRepositoryConnector {
 	/**
 	 * The slug for the plugin.
 	 *
 	 * @var string
 	 */
-	private const SLUG = 'snordians-h5p-content-type-hub-manager';
+	private const SLUG = 'snordians-h5p-content-type-repository-manager';
 
 	/**
 	 * HTTP request timeout in seconds.

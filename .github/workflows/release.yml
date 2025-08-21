@@ -18,7 +18,7 @@ jobs:
       - name: Create ZIP file
         run: |
           set -e
-          ZIP_NAME="snordians-h5p-content-type-hub-manager.zip"
+          ZIP_NAME="snordians-h5p-content-type-repository-manager.zip"
           echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
           zip -rq "$ZIP_NAME" . \
             -x ".github/*" ".git/*" ".gitignore" \

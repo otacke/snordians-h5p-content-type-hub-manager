@@ -2,10 +2,10 @@
 /**
  * Options page for the plugin.
  *
- * @package snordians-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-repository-manager
  */
 
-namespace Snordian\H5PContentTypeHubManager;
+namespace Snordian\H5PContentTypeRepositoryManager;
 
 // as suggested by the WordPress community.
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 /**
  * Options page for the plugin.
  *
- * @package snordians-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-repository-manager
  */
 class Options {
 
@@ -36,7 +36,7 @@ class Options {
 	 *
 	 * @var string
 	 */
-	private static $option_slug = 'snordiansh5pcontenttypehubmanager_option';
+	private static $option_slug = 'snordiansh5pcontenttyperepositorymanager_option';
 
 	/**
 	 * Current endpoint URL base.
@@ -76,11 +76,11 @@ class Options {
 	 * Set defaults.
 	 */
 	public static function set_defaults() {
-		if ( get_option( 'snordiansh5pcontenttypehubmanager_defaults_set' ) ) {
+		if ( get_option( 'snordiansh5pcontenttyperepositorymanager_defaults_set' ) ) {
 			return; // No need to set defaults.
 		}
 
-		update_option( 'snordiansh5pcontenttypehubmanager_defaults_set', true );
+		update_option( 'snordiansh5pcontenttyperepositorymanager_defaults_set', true );
 
 		update_option(
 			self::$option_slug,
@@ -97,7 +97,7 @@ class Options {
 	public static function delete_options() {
 		delete_option( self::$option_slug );
 		delete_site_option( self::$option_slug );
-		delete_option( 'snordiansh5pcontenttypehubmanager_defaults_set' );
+		delete_option( 'snordiansh5pcontenttyperepositorymanager_defaults_set' );
 	}
 
 	/**
@@ -107,9 +107,9 @@ class Options {
 		// This page will be under "Settings".
 		add_options_page(
 			'Settings Admin',
-			'H5P Content Type Hub Manager',
+			'H5P Content Type Repository Manager',
 			'manage_options',
-			'snordiansh5pcontenttypehubmanager-admin',
+			'snordiansh5pcontenttyperepositorymanager-admin',
 			array( $this, 'create_admin_page' )
 		);
 	}
@@ -120,11 +120,11 @@ class Options {
 	public function create_admin_page() {
 		?>
 		<div class="wrap">
-			<h2><?php echo esc_html( __( 'H5P Content Type Hub Manager', 'snordians-h5p-content-type-hub-manager' ) ); ?></h2>
+			<h2><?php echo esc_html( __( 'H5P Content Type Repository Manager', 'snordians-h5p-content-type-repository-manager' ) ); ?></h2>
 			<form method="post" action="options.php">
 				<?php
-				settings_fields( 'snordiansh5pcontenttypehubmanager_option_group' );
-				do_settings_sections( 'snordiansh5pcontenttypehubmanager-admin' );
+				settings_fields( 'snordiansh5pcontenttyperepositorymanager_option_group' );
+				do_settings_sections( 'snordiansh5pcontenttyperepositorymanager-admin' );
 				submit_button();
 				?>
 			</form>
@@ -138,31 +138,31 @@ class Options {
 	public function page_init() {
 		// The `sanitize` function properly sanitizes all input.
 		register_setting(
-			'snordiansh5pcontenttypehubmanager_option_group',
-			'snordiansh5pcontenttypehubmanager_option',
+			'snordiansh5pcontenttyperepositorymanager_option_group',
+			'snordiansh5pcontenttyperepositorymanager_option',
 			array( $this, 'sanitize' )
 		);
 
 		add_settings_section(
 			'general_settings',
-			__( 'General', 'snordians-h5p-content-type-hub-manager' ),
+			__( 'General', 'snordians-h5p-content-type-repository-manager' ),
 			array( $this, 'print_general_section_info' ),
-			'snordiansh5pcontenttypehubmanager-admin'
+			'snordiansh5pcontenttyperepositorymanager-admin'
 		);
 
 		add_settings_field(
 			'url',
-			__( 'URL', 'snordians-h5p-content-type-hub-manager' ),
+			__( 'URL', 'snordians-h5p-content-type-repository-manager' ),
 			array( $this, 'endpoint_url_base_callback' ),
-			'snordiansh5pcontenttypehubmanager-admin',
+			'snordiansh5pcontenttyperepositorymanager-admin',
 			'general_settings'
 		);
 
 		add_settings_field(
 			'update_schedule',
-			__( 'Schedule automated updates', 'snordians-h5p-content-type-hub-manager' ),
+			__( 'Schedule automated updates', 'snordians-h5p-content-type-repository-manager' ),
 			array( $this, 'update_schedule_callback' ),
-			'snordiansh5pcontenttypehubmanager-admin',
+			'snordiansh5pcontenttyperepositorymanager-admin',
 			'general_settings'
 		);
 	}
@@ -206,7 +206,7 @@ class Options {
 		// I don't like this mixing of HTML and PHP, but it seems to be WordPress custom.
 		?>
 		<input
-			name="snordiansh5pcontenttypehubmanager_option[endpoint_url_base]"
+			name="snordiansh5pcontenttyperepositorymanager_option[endpoint_url_base]"
 			type="text"
 			id="url"
 			minlength="1"
@@ -218,7 +218,7 @@ class Options {
 				echo esc_html(
 					sprintf(
 					// Translators: %s is the default endpoint URL base of H5P Group's Content Type Hub.
-						__( 'Set the desired base URL for the H5P Content Type Hub Manager. Default is %s', 'snordians-h5p-content-type-hub-manager' ),
+						__( 'Set the desired base URL for the H5P Content Type Repository Manager. Default is %s', 'snordians-h5p-content-type-repository-manager' ),
 						esc_html( self::DEFAULT_ENDPOINT_URL_BASE )
 					)
 				);
@@ -233,12 +233,12 @@ class Options {
 	public function update_schedule_callback() {
 		$current_schedule = self::get_update_schedule();
 		$schedules        = array(
-			'never'  => __( 'Never', 'snordians-h5p-content-type-hub-manager' ),
-			'daily'  => __( 'Daily', 'snordians-h5p-content-type-hub-manager' ),
-			'weekly' => __( 'Weekly', 'snordians-h5p-content-type-hub-manager' ),
+			'never'  => __( 'Never', 'snordians-h5p-content-type-repository-manager' ),
+			'daily'  => __( 'Daily', 'snordians-h5p-content-type-repository-manager' ),
+			'weekly' => __( 'Weekly', 'snordians-h5p-content-type-repository-manager' ),
 		);
 		?>
-		<select name="snordiansh5pcontenttypehubmanager_option[update_schedule]" id="update_schedule">
+		<select name="snordiansh5pcontenttyperepositorymanager_option[update_schedule]" id="update_schedule">
 			<?php foreach ( $schedules as $value => $label ) : ?>
 				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_schedule, $value ); ?>>
 					<?php echo esc_html( $label ); ?>
@@ -246,7 +246,7 @@ class Options {
 			<?php endforeach; ?>
 		</select>
 		<p class="description">
-			<?php echo esc_html( __( 'Choose how often to automatically update H5P content types that are already installed from the Hub.', 'snordians-h5p-content-type-hub-manager' ) ); ?>
+			<?php echo esc_html( __( 'Choose how often to automatically update H5P content types that are already installed from the Hub.', 'snordians-h5p-content-type-repository-manager' ) ); ?>
 		</p>
 		<?php
 	}

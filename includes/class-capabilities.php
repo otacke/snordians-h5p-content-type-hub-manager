@@ -1,11 +1,11 @@
 <?php
 /**
- * Capabilities management for H5P Content Type Hub Manager.
+ * Capabilities management for H5P Content Type Repository Manager.
  *
- * @package snordians-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-repository-manager
  */
 
-namespace Snordian\H5PContentTypeHubManager;
+namespace Snordian\H5PContentTypeRepositoryManager;
 
 // as suggested by the WordPress community.
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );

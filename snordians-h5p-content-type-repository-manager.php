@@ -1,18 +1,18 @@
 <?php
 /**
- * Plugin Name: Snordian's H5P Content Type Hub Manager
- * Plugin URI: https://github.com/otacke/snordians-h5p-content-type-hub-manager
- * Text Domain: snordians-h5p-content-type-hub-manager
+ * Plugin Name: Snordian's H5P Content Type Repository Manager
+ * Plugin URI: https://github.com/otacke/snordians-h5p-content-type-repository-manager
+ * Text Domain: snordians-h5p-content-type-repository-manager
  * Description: Manage the H5P Content Type Hub.
  * Version: 1.0.5
  * Author: Oliver Tacke (SNORDIAN), Sustainum
  * Author URI: https://snordian.de
  * License: MIT
  *
- * @package snordians-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-repository-manager
  */
 
-namespace Snordian\H5PContentTypeHubManager;
+namespace Snordian\H5PContentTypeRepositoryManager;
 
 // as suggested by the WordPress community.
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 define( 'ALTERNATE_WP_CRON', true );
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-capabilities.php';
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-contenttypehubconnector.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-contenttyperepositoryconnector.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-main.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'class-options.php';
 
@@ -66,8 +66,8 @@ function on_uninstall() {
 	wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );
 }
 
-register_activation_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_activation' );
-register_deactivation_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_deactivation' );
-register_uninstall_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_uninstall' );
+register_activation_hook( __FILE__, 'Snordian\H5PContentTypeRepositoryManager\on_activation' );
+register_deactivation_hook( __FILE__, 'Snordian\H5PContentTypeRepositoryManager\on_deactivation' );
+register_uninstall_hook( __FILE__, 'Snordian\H5PContentTypeRepositoryManager\on_uninstall' );
 
-add_action( 'init', 'Snordian\H5PContentTypeHubManager\init' );
+add_action( 'init', 'Snordian\H5PContentTypeRepositoryManager\init' );

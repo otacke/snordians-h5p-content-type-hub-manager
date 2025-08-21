@@ -2,10 +2,10 @@
 /**
  * Main plugin class file.
  *
- * @package snordians-h5p-content-type-hub-manager
+ * @package snordians-h5p-content-type-repository-manager
  */
 
-namespace Snordian\H5PContentTypeHubManager;
+namespace Snordian\H5PContentTypeRepositoryManager;
 
 // as suggested by the WordPress community.
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
@@ -46,7 +46,7 @@ class Main {
 	 * Update installed H5P libraries by checking for new versions in the content type hub.
 	 */
 	public function update_installed_h5p_libraries() {
-		$content_type_hub_connector = new ContentTypeHubConnector();
+		$content_type_hub_connector = new ContentTypeRepositoryConnector();
 		$content_type_hub_connector->install_new_content_type_versions();
 	}
 
@@ -81,7 +81,7 @@ class Main {
 	 * Update the content type hub cache.
 	 */
 	public static function update_content_type_hub_cache() {
-		$content_type_hub_connector = new ContentTypeHubConnector();
+		$content_type_hub_connector = new ContentTypeRepositoryConnector();
 		$content_type_hub_connector->update_content_type_hub_cache();
 	}
 
