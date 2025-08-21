@@ -66,20 +66,8 @@ function on_uninstall() {
 	wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );
 }
 
-/**
- * Load the text domain for internationalization.
- */
-function shcthb_load_plugin_textdomain() {
-	load_plugin_textdomain(
-		'snordians-h5p-content-type-hub-manager',
-		false,
-		plugin_basename( __DIR__ ) . DIRECTORY_SEPARATOR . 'languages'
-	);
-}
-
 register_activation_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_activation' );
 register_deactivation_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_deactivation' );
 register_uninstall_hook( __FILE__, 'Snordian\H5PContentTypeHubManager\on_uninstall' );
 
-add_action( 'plugins_loaded', 'Snordian\H5PContentTypeHubManager\shcthb_load_plugin_textdomain' );
 add_action( 'init', 'Snordian\H5PContentTypeHubManager\init' );
