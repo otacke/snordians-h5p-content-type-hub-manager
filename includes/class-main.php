@@ -16,11 +16,13 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 class Main {
 
 	/**
-	 * Path to the H5P classes file in the H5P plugin.
-	 *
-	 * @var string
+	 * Get the path to the H5P classes file of the H5P plugin (not this plugin).
+	 * WP_PLUGIN_DIR should not be used directly.
 	 */
-	private static $h5p_classes_file_path = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'h5p' . DIRECTORY_SEPARATOR . 'h5p-php-library' . DIRECTORY_SEPARATOR . 'h5p.classes.php';
+	private static function getH5PClassesFilePath() {
+		$wp_plugin_dir = plugin_dir_path( __FILE__ ) . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+		return $wp_plugin_dir . 'h5p' . DIRECTORY_SEPARATOR . 'h5p-php-library' . DIRECTORY_SEPARATOR . 'h5p.classes.php';
+	}
 
 	/**
 	 * Constructor.
@@ -123,11 +125,11 @@ class Main {
 			return array();
 		}
 
-		if ( ! $wp_filesystem->exists( self::$h5p_classes_file_path ) ) {
+		if ( ! $wp_filesystem->exists( self::getH5PClassesFilePath() ) ) {
 			return array();
 		}
 
-		$file_content = $wp_filesystem->get_contents( self::$h5p_classes_file_path );
+		$file_content = $wp_filesystem->get_contents( self::getH5PClassesFilePath() );
 
 		if ( false === $file_content ) {
 			return array();
@@ -163,11 +165,11 @@ class Main {
 			return;
 		}
 
-		if ( ! $wp_filesystem->exists( self::$h5p_classes_file_path ) ) {
+		if ( ! $wp_filesystem->exists( self::getH5PClassesFilePath() ) ) {
 			return;
 		}
 
-		$file_content = $wp_filesystem->get_contents( self::$h5p_classes_file_path );
+		$file_content = $wp_filesystem->get_contents( self::getH5PClassesFilePath() );
 
 		if ( false === $file_content ) {
 			return;
@@ -179,6 +181,6 @@ class Main {
 			$file_content
 		);
 
-		$wp_filesystem->put_contents( self::$h5p_classes_file_path, $file_content, FS_CHMOD_FILE );
+		$wp_filesystem->put_contents( self::getH5PClassesFilePath(), $file_content, FS_CHMOD_FILE );
 	}
 }
