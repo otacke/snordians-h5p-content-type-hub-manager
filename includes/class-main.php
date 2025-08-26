@@ -31,16 +31,16 @@ class Main {
 		new Options( self::get_endpoint_in_h5p_core() );
 		add_action( 'update_option', array( self::class, 'handle_option_updated' ), 10, 3 );
 		add_action( 'upgrader_process_complete', array( self::class, 'handle_content_type_upgraded' ), 10, 2 );
-		add_action( 'h5p_content_hub_manager_update_libraries', array( $this, 'update_installed_h5p_libraries' ), 10, 0 );
+		add_action( 'snordiansh5pcontenttyperepositorymanager_update_libraries', array( $this, 'update_installed_h5p_libraries' ), 10, 0 );
 
 		$update_schedule = Options::get_update_schedule();
 		if ( 'daily' === $update_schedule || 'weekly' === $update_schedule ) {
-			if ( ! wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' ) ) {
-				wp_schedule_event( time(), $update_schedule, 'h5p_content_hub_manager_update_libraries' );
+			if ( ! wp_next_scheduled( 'snordiansh5pcontenttyperepositorymanager_update_libraries' ) ) {
+				wp_schedule_event( time(), $update_schedule, 'snordiansh5pcontenttyperepositorymanager_update_libraries' );
 			}
 		} else {
-			$timestamp = wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' );
-			wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );
+			$timestamp = wp_next_scheduled( 'snordiansh5pcontenttyperepositorymanager_update_libraries' );
+			wp_unschedule_event( $timestamp, 'snordiansh5pcontenttyperepositorymanager_update_libraries' );
 		}
 	}
 

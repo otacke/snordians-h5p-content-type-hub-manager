@@ -50,8 +50,8 @@ function on_activation() {
  * Handle plugin deactivation.
  */
 function on_deactivation() {
-	$timestamp = wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' );
-	wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );
+	$timestamp = wp_next_scheduled( 'snordiansh5pcontenttyperepositorymanager_update_libraries' );
+	wp_unschedule_event( $timestamp, 'snordiansh5pcontenttyperepositorymanager_update_libraries' );
 }
 
 /**
@@ -62,8 +62,8 @@ function on_uninstall() {
 	Capabilities::remove_capabilities();
 	Main::update_endpoint_in_h5p_core( Options::get_default_endpoint_url_base() );
 
-	$timestamp = wp_next_scheduled( 'h5p_content_hub_manager_update_libraries' );
-	wp_unschedule_event( $timestamp, 'h5p_content_hub_manager_update_libraries' );
+	$timestamp = wp_next_scheduled( 'snordiansh5pcontenttyperepositorymanager_update_libraries' );
+	wp_unschedule_event( $timestamp, 'snordiansh5pcontenttyperepositorymanager_update_libraries' );
 }
 
 register_activation_hook( __FILE__, 'Snordian\H5PContentTypeRepositoryManager\on_activation' );
