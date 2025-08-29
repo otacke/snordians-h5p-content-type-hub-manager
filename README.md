@@ -1,6 +1,6 @@
-# Snordian's H5P Content Type Repository Manager
+# SNORDIAN's H5P Content Type Repository Manager
 
-The "Snordian's H5P Content Type Repository Manager" plugin for WordPress allows to set an alternative H5P Content Type Hub Server to get H5P contents from. It also offers additional functionality related to the server that is used.
+The "SNORDIAN's H5P Content Type Repository Manager" plugin for WordPress allows to set an alternative H5P Content Type Hub Server to get H5P contents from. It also offers additional functionality related to the server that is used.
 
 ## Installation
 
@@ -39,6 +39,6 @@ to use the newer libraries.
 The "SNORDIAN's H5P Content Type Repository Manager" plugin for WordPress is is licensed under the [MIT License](https://github.com/otacke/snordians-h5p-content-type-repository-manager/blob/master/LICENSE).
 
 ## Sponsor note
-The plugin was developed by [Sustainum](https://www.sustainum.de/) within the [XR Energy project](https://xr-energy.eu/). Development work was carried out by [Snordian](https://snordian.de) as a contractor.
+The plugin was developed by [Sustainum](https://www.sustainum.de/) within the [XR Energy project](https://xr-energy.eu/). Development work was carried out by [SNORDIAN](https://snordian.de) as a contractor.
 
 _"Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them.”_
